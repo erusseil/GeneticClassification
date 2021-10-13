@@ -12,14 +12,6 @@ from mpl_toolkits import mplot3d
 colors1 = ['blue','orange','salmon','teal','khaki','green','violet']
 colors2 = ['darkblue','darkorange','tomato','darkslategrey','darkkhaki','darkgreen','darkviolet']
 
-dic_classes = {90:'SNIa',67:'SNIa-91bg',
-             52:'SNIax',42:'SNII',
-             62:'SNIbc',95:'SLSN-I',
-             15:'TDE',64:'KN',
-             88:'AGN',92:'RRL',
-             65:'M-dwarf',16:'EB',
-             53:'Mira',6:'Lens-Single',
-             994:'PISN', 0:'UNKNOWN'}
 
 def scatter_plot(function,features,feature_toplot,dic_goals,classes = 0):
 
@@ -59,7 +51,7 @@ def scatter_plot(function,features,feature_toplot,dic_goals,classes = 0):
         else :
             color = colors1[count]
 
-        plt.scatter(features.loc[flag,feature_toplot],function.predict(features)[flag],label=dic_classes.get(i),color=color);
+        plt.scatter(features.loc[flag,feature_toplot],function.predict(features)[flag],label=i,color=color);
         count+=1
     
     
@@ -116,7 +108,7 @@ def histo_plot(function,features,dic_goals,bins,classes = 0, alpha = 0.7):
         else :
             color = colors1[count]
             
-        plt.hist(function.predict(features)[flag],bins=bins,label=dic_classes.get(i),alpha=alpha,color=color);
+        plt.hist(function.predict(features)[flag],bins=bins,label=i,alpha=alpha,color=color);
         count+=1
     
     
