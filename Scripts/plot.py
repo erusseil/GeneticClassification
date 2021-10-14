@@ -7,13 +7,14 @@ from scipy.stats import norm
 import pickle
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
+from collections import OrderedDict
 
 
 colors1 = ['blue','orange','salmon','teal','khaki','green','violet']
 colors2 = ['darkblue','darkorange','tomato','darkslategrey','darkkhaki','darkgreen','darkviolet']
 
 
-def scatter_plot(function,features,feature_toplot,dic_goals,classes = 0):
+def scatter_plot(function,features,feature_toplot,dic_goals,classes = "Unclassified"):
 
     """Scatter plots : result of the function versus one of the features
     
@@ -33,24 +34,33 @@ def scatter_plot(function,features,feature_toplot,dic_goals,classes = 0):
         
     classes: np.array
         Array of all the classes in case they are known in advance.
-        Default is 0 (all points will be labled 'unknown')
+        Default is "Unclassified" (all points will be labled "Unclassified")
         
     """
     
     #If we do not specify the classes, creates an array of zeros
-    if type(classes) == int :
-        classes = np.zeros(len(features))
+    if type(classes) == str :
+        if classes == "Unclassified":
+            classes = np.array([classes]*len(features))
+            
+    #We order the dict by alphebetical order to match the colors :
+    dic_goals = ({v: k for k, v in dic_goals.items()}) # Reverse the dict
+    dic_goals = OrderedDict(sorted(dic_goals.items(), key=lambda t: t[0])) # Sort by numerical order
+    dic_goals = ({v: k for k, v in dic_goals.items()}) # Reverse again
+        
     
     # Plot all the points : one plt.scatter per type of points
     count = 0
-    for i in np.unique(classes):
+    
+    for i in sorted(np.unique(classes)):
         flag = classes == i
     
-        if i == 0:
+        if i == "Unclassified":
             color = 'gray'
         else :
             color = colors1[count]
-
+        
+        
         plt.scatter(features.loc[flag,feature_toplot],function.predict(features)[flag],label=i,color=color);
         count+=1
     
@@ -65,10 +75,7 @@ def scatter_plot(function,features,feature_toplot,dic_goals,classes = 0):
     
     
     
-    
-    
-    
-def histo_plot(function,features,dic_goals,bins,classes = 0, alpha = 0.7):
+def histo_plot(function,features,dic_goals,bins,classes = "Unclassified", alpha = 0.7):
    
     """Histogram plots : distribution of the function results
     
@@ -86,24 +93,31 @@ def histo_plot(function,features,dic_goals,bins,classes = 0, alpha = 0.7):
         
     classes: np.array
         Array of all the classes in case they are known in advance.
-        Default is 0 (all points will be labled 'unknown')
+        Default is "Unclassified" (all points will be labled "Unclassified")
         
     alpha: float
         Between 0 and 1. Defines the opacity of the plot.
         
     """
     
-    #If we do not specify the classes, creates an array of zeros
-    if type(classes) == int :
-        classes = np.zeros(len(features))
+    # If we do not specify the classes, creates an array of zeros
+    if type(classes) == str :
+        if classes == "Unclassified":
+            classes = np.array([classes]*len(features))
    
 
+    # We order the dict by alphebetical order to match the colors :
+    dic_goals = ({v: k for k, v in dic_goals.items()}) # Reverse the dict
+    dic_goals = OrderedDict(sorted(dic_goals.items(), key=lambda t: t[0])) # Sort by numerical order
+    dic_goals = ({v: k for k, v in dic_goals.items()}) # Reverse again
+    
+    
     # Plot all the points : one plt.scatter per type of points
     count = 0
-    for i in np.unique(classes):
+    for i in sorted(np.unique(classes)):
         flag = classes == i
         
-        if i == 0:
+        if i == "Unclassified":
             color = 'gray'
         else :
             color = colors1[count]
