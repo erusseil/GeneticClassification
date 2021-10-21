@@ -14,7 +14,7 @@ colors1 = ['blue','orange','salmon','teal','khaki','green','violet']
 colors2 = ['darkblue','darkorange','tomato','darkslategrey','darkkhaki','darkgreen','darkviolet']
 
 
-def scatter_plot(function,features,feature_toplot,dic_goals,classes = "Unclassified"):
+def scatter_plot(function,features,feature_toplot,dic_goals,classes = "Unclassified", thresh='None'):
 
     """Scatter plots : result of the function versus one of the features
     
@@ -36,6 +36,9 @@ def scatter_plot(function,features,feature_toplot,dic_goals,classes = "Unclassif
         Array of all the classes in case they are known in advance.
         Default is "Unclassified" (all points will be labled "Unclassified")
         
+    thresh: float
+        Plot the threshold line. If 'None' no threshold will be plot
+        Default is 'None'
     """
     
     #If we do not specify the classes, creates an array of zeros
@@ -72,10 +75,11 @@ def scatter_plot(function,features,feature_toplot,dic_goals,classes = "Unclassif
         
         plt.axhline(y=line, label='Target %s : %s'%(line,name),color=colors2[i])
     
+    if thresh != 'None':
+        plt.axhline(y=thresh, label='Treshold',color='black')
     
     
-    
-def histo_plot(function,features,dic_goals,bins,classes = "Unclassified", alpha = 0.7,plot_lines = True):
+def histo_plot(function,features,dic_goals,bins,classes = "Unclassified", alpha = 0.7,plot_lines = True, thresh='None'):
    
     """Histogram plots : distribution of the function results
     
@@ -102,6 +106,9 @@ def histo_plot(function,features,dic_goals,bins,classes = "Unclassified", alpha 
         If True will plot the target values as vertical lines
         Default is True
         
+    thresh: float
+        Plot the threshold line. If 'None' no threshold will be plot
+        Default is 'None'    
     """
     
     # If we do not specify the classes, creates an array of zeros
@@ -139,4 +146,5 @@ def histo_plot(function,features,dic_goals,bins,classes = "Unclassified", alpha 
             plt.axvline(x=line, label='Target %s : %s'%(line,name),color=colors2[i])
         
 
-  
+    if thresh != 'None':
+        plt.axvline(x=thresh, label='Threshold',color='black')
