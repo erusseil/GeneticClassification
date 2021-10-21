@@ -1,0 +1,23 @@
+
+
+ CREATION OF THE TESTING DATA BASE
+ 
+We start with  32926 objects and 10855958 measurements
+
+PISN ignored
+
+After EXTRA-GALACTIC and DDF we have 32699 objects and 10782132 measurements
+--> There are  6 PISN in the dataset
+
+After PASSBANDS we have 32699 objects and 7008772 measurements
+--> There are  6 PISN in the dataset
+
+After DDB we have 32479 objects and 417646 measurements
+--> There are  6 PISN in the dataset
+
+Total time to normalise flux 0.2 sec
+
+Total time to check completness 0.5 sec
+
+After COMPLETNESS we are left with 4041 objects and 161833 measurements
+--> There are  3 PISN in the dataset
